@@ -18,6 +18,7 @@
             const currentUrl = window.location.href;
             GM_openInTab(currentUrl, { active: true });
         }
+        //Open Gemini
         if (altK && event.key === 'g') {
             event.preventDefault();
             GM_openInTab("https://gemini.google.com/app?hl=vi", { active: true });
