@@ -12,16 +12,33 @@
     'use strict';
     document.addEventListener('keydown', function(event) {
         // Duplicate Tab
-        let altK=event.altKey;
+        let alt=event.altKey,
+            crtl=event.ctrlKey,
+            shift=event.shiftKey;
+        const currentUrl = window.location.href;
         if (altK && event.key === 't') {
             event.preventDefault();
-            const currentUrl = window.location.href;
             GM_openInTab(currentUrl, { active: true });
         }
         //Open Gemini
         if (altK && event.key === 'g') {
             event.preventDefault();
             GM_openInTab("https://gemini.google.com/app?hl=vi", { active: true });
+        }
+        // Auto Capslock in Geogebra
+        if (currentUrl === 'https://www.geogebra.org/geometry') {
+            let c = event.key, x=c.charCodeAt(0);
+            if (alt && ctrl ) {
+                return ;
+            } 
+            if (x > 64 && x < 91) {
+                x+=32;
+                document.execCommand('insertText',false,String.fromCharCode(x));
+            }
+            if (x > 96 && x < 123) {
+                x-=32;
+                document.execCommand('insertText',false,String.fromCharCode(x));
+            }
         }
     });
 })();
