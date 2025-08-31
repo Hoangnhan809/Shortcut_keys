@@ -14,29 +14,34 @@
         // Duplicate Tab
         let alt=event.altKey,
             ctrl=event.ctrlKey,
-            shift=event.shiftKey;
+            shift=event.shiftKey,
+            c = event.key;
         const currentUrl = window.location.href;
-        if (alt && event.key === 't') {
+        if (alt && c === 't') {
             event.preventDefault();
             GM_openInTab(currentUrl, { active: true });
         }
         //Open Gemini
-        if (alt && event.key === 'g') {
+        if (alt && c === 'g') {
             event.preventDefault();
             GM_openInTab("https://gemini.google.com/app?hl=vi", { active: true });
         }
         // Auto Capslock in Geogebra
         if (currentUrl === 'https://www.geogebra.org/geometry') {
-            let c = event.key, x=c.charCodeAt(0);
-            if (alt && ctrl) {
-                return ;
-            }
-            if (x > 64 && x < 91) {
-                x+=32;
-                document.execCommand('insertText',false,String.fromCharCode(x));
-            } else if (x > 96 && x < 123) {
-                x-=32;
-                document.execCommand('insertText',false,String.fromCharCode(x));
+            let x = c.charCodeAt(0);
+            if (alt || ctrl || c.length>1) {
+                return;
+            } else {
+                event.preventDefault();
+                if (x > 96 && x < 123){
+                    x-=32;
+                    document.execCommand('insertText',false,String.fromCharCode(x));
+                } else if (x > 64 && x < 91){
+                    x+=32;
+                    document.execCommand('insertText',false,String.fromCharCode(x));
+                } else {
+                    document.execCommand('insertText',false,c);
+                }
             }
         }
     });
