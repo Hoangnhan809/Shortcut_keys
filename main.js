@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @description  Some unuseful shortcut keys
-// @author       You
+// @author       Me
 // @match        *://*/*
 // @grant        GM_openInTab
 // ==/UserScript==
