@@ -26,6 +26,11 @@
             event.preventDefault();
             GM_openInTab("https://gemini.google.com/app?hl=vi", { active: true });
         }
+        //Open Coding Space
+        if (a && k === 'c') {
+            event.preventDefault();
+            GM_openInTab("https://www.programiz.com/javascript/online-compiler/", {active: true });
+        }
         // Auto Capslock in Geogebra
         if (currentUrl === 'https://www.geogebra.org/geometry') {
             let x = k.charCodeAt(0);
